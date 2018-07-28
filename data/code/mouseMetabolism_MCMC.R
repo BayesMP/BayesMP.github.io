@@ -4,7 +4,10 @@ WD <- '~/Desktop/BayesMP.github.io/data/mouseMetabolism/'
 setwd(WD)
 
 
-data_brown <- read.csv
+data_brown <- read.delim("https://bayesmp.github.io/data/mouseMetabolism/data_brown.csv", row.names = 1, sep=",")
+
+
+
 load('~/Desktop/BayesMP.github.io/data/raw/mouse.Rdata')
 annotationFile <- read.delim('~/Desktop/BayesMP.github.io/data/raw/GPL1261-56135.txt',skip=16)
 annotationDF <- data.frame(probes=annotationFile$ID, genes=sapply(strsplit(annotationFile$Gene.Symbol,split=' /// '),function(x) x[1]) )
