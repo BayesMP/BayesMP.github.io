@@ -42,9 +42,9 @@ rownames(data_brown2) <- annotationDF_filter$genes
 rownames(data_heart2) <- annotationDF_filter$genes
 rownames(data_liver2) <- annotationDF_filter$genes
 
-data_brown <- data_brown2[!duplicated(annotationDF_filter$genes),]
-data_heart <- data_heart2[!duplicated(annotationDF_filter$genes),]
-data_liver <- data_liver2[!duplicated(annotationDF_filter$genes),]
+data_brown <- data_brown2[!duplicated(annotationDF_filter$genes) & !is.na(annotationDF_filter$genes),]
+data_heart <- data_heart2[!duplicated(annotationDF_filter$genes) & !is.na(annotationDF_filter$genes),]
+data_liver <- data_liver2[!duplicated(annotationDF_filter$genes) & !is.na(annotationDF_filter$genes),]
 
 write.csv(data_brown, "data_brown.csv")
 write.csv(data_heart, "data_heart.csv")
