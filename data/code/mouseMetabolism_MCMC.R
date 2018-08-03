@@ -50,6 +50,21 @@ head(Z)
 
 
 ## Perform MCMC of BayesMP. There are two models the alternative distributions: Dirichlet Process (DP) or Gaussian distribution (DP). For the purpose of fast computing, we adopt DP method.
+WD <- '~/Desktop/'
+setwd(WD) ## You can set the working directory here. Some MCMC results will be saved here.
+
+niter <- 1000 ## number of iterations.
+burnin <- 200 ## number of burnin samples. Note the burnin samples will be disgarded.
+
+set.seed(15213)	## set random seed
+
+## writeHSall=T will save the intermediate results for the Bayesian hypothesis testing settings.
+## writeY=T will save the intermediate results for the posterior samples of Y, which is used as the input for metaPattern detection.
+## If you want to track the MCMC samples for other paramters including gamma, Pi, Delta, 
+## One can save these results by set writeGamma, writePi, writeDelta to be TRUE.
+## One can set gamma to be fixed by setting updateGamma = TRUE, if he has a good estimate of initial gamma.
+
+system.time(BayesMP_DP(Z,niter=niter, burnin=burnin, writeY = T, writeHSall=T))
 
 
 
@@ -104,14 +119,14 @@ while (length(oneLine <- readLines(con, n = 1, warn = FALSE)) > 0) {
 } 
 
 close(con)
-
+	
 ## we only consider HSb_qvalue<0.01 for the meta-pattern detection
 resYplus_DE <- resYplus[HSb_qvalue<0.01,]
 resYminus_DE <- resYminus[HSb_qvalue<0.01,]
 
 ## tight clustering
 dissimilarity <- distance(resYplus_DE, resYminus_DE, niter - burnin) ## calculate dissimilarity matrix for each pair of genes.
-atarget <- 4
+atarget <- 2
 ## here, may need to depend on the consensus clustering algorithm to detect gene modules.
 tightClustResult <- tightClustPam(dissimilarity, target=atarget, k.min=25) ## perform the tight clustering to identify meta-pattern modules. ## k.min controls the size of the final meta module. A small k.min will result in large module size and a large k.min will result in small module size.
 
