@@ -495,8 +495,10 @@ head(Z)
 <pre class="r"><code># WD &lt;- '~/Desktop/'
 # setwd(WD) # You can set the working directory here. Some MCMC results will be saved here.
 
-niter &lt;- 1000 # number of iterations.
+niter &lt;- 1000 # number of iterations
+# In real application, niter=10000 is suggested.
 burnin &lt;- 200 # number of burnin samples. Note the burnin samples will be disgarded.
+# In real application, burnin=500 is suggested.
 
 set.seed(15213) # set random seed
 
@@ -509,7 +511,7 @@ set.seed(15213) # set random seed
 system.time(BayesMP(Z,niter=niter, burnin=burnin, writeY = TRUE, writeHSall=TRUE))
 #&gt; performing MCMC, i = 1,2,..., niter (= 1000)  [one &quot;.&quot; per sample]:
 #&gt;    user  system elapsed 
-#&gt; 126.677   1.380 131.589</code></pre>
+#&gt; 123.788   0.806 127.547</code></pre>
 </div>
 <div id="task-i-meta-analysis.-there-are-three-hypothesis-testing-settings." class="section level1">
 <h1><span class="header-section-number">6</span> Task I, meta analysis. There are three hypothesis testing settings.</h1>
